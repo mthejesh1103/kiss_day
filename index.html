@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kiss Day 💋</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+/* Dreamy animated background */
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+background:linear-gradient(-45deg,#ff758c,#ff7eb3,#ffb199,#ff0844);
+background-size:400% 400%;
+animation:gradientMove 12s ease infinite;
+}
+
+@keyframes gradientMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* Floating kiss bubbles */
+
+.kiss{
+position:absolute;
+font-size:22px;
+animation:floatUp linear infinite;
+opacity:.75;
+}
+
+@keyframes floatUp{
+from{
+transform:translateY(100vh) scale(.6);
+}
+to{
+transform:translateY(-10vh) scale(1.2);
+}
+}
+
+/* Glass Card */
+
+.card{
+backdrop-filter:blur(20px);
+background:rgba(255,255,255,0.15);
+padding:55px;
+border-radius:30px;
+text-align:center;
+color:white;
+box-shadow:0 25px 70px rgba(0,0,0,0.3);
+width:90%;
+max-width:520px;
+}
+
+/* Title */
+
+h1{
+font-family:'Great Vibes',cursive;
+font-size:4rem;
+}
+
+/* Type text */
+
+#message{
+margin-top:20px;
+font-size:1.2rem;
+min-height:70px;
+}
+
+/* Buttons */
+
+.buttons{
+margin-top:25px;
+}
+
+button{
+padding:14px 34px;
+border-radius:40px;
+border:none;
+cursor:pointer;
+font-size:1rem;
+margin:10px;
+transition:.3s;
+}
+
+.kissBtn{
+background:white;
+color:#ff4d6d;
+font-weight:600;
+}
+
+.kissBtn:hover{
+transform:scale(1.12);
+box-shadow:0 10px 30px rgba(255,255,255,0.6);
+}
+
+.shyBtn{
+background:transparent;
+border:2px solid white;
+color:white;
+position:relative;
+}
+
+/* Heart explosion */
+
+.heart{
+position:absolute;
+font-size:24px;
+animation:explode 1s forwards;
+}
+
+@keyframes explode{
+0%{
+transform:translate(-50%,-50%) scale(1);
+opacity:1;
+}
+100%{
+transform:translate(var(--x),var(--y)) scale(0);
+opacity:0;
+}
+}
+
+/* glow pulse after kiss */
+
+.glow{
+animation:pulse 1.2s infinite alternate;
+}
+
+@keyframes pulse{
+from{box-shadow:0 0 20px rgba(255,255,255,0.3);}
+to{box-shadow:0 0 60px rgba(255,255,255,0.8);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+
+<h1>Happy Kiss Day 💋</h1>
+
+<div id="message"></div>
+
+<div class="buttons">
+<button class="kissBtn" onclick="sendKiss()">Send a Kiss 😘</button>
+<button class="shyBtn" onmouseover="runAway(this)">Too Shy 🙈</button>
+</div>
+
+</div>
+
+<script>
+
+/* TYPEWRITER LOVE LINE */
+
+const text =
+"Every moment with you feels softer, warmer, and sweeter… If I could, I would pause time just to steal one gentle kiss.";
+
+let i=0;
+
+function typeWriter(){
+if(i < text.length){
+document.getElementById("message").innerHTML += text.charAt(i);
+i++;
+setTimeout(typeWriter,35);
+}
+}
+
+typeWriter();
+
+/* FLOATING KISSES */
+
+function createKisses(){
+for(let i=0;i<30;i++){
+
+let kiss=document.createElement("div");
+kiss.innerHTML="💋";
+kiss.classList.add("kiss");
+
+kiss.style.left=Math.random()*100+"vw";
+kiss.style.animationDuration=(6+Math.random()*6)+"s";
+
+document.body.appendChild(kiss);
+}
+}
+
+createKisses();
+
+/* SHY BUTTON ESCAPE */
+
+function runAway(btn){
+btn.style.position="absolute";
+btn.style.top=Math.random()*80+"%";
+btn.style.left=Math.random()*80+"%";
+}
+
+/* KISS CELEBRATION */
+
+function sendKiss(){
+
+document.getElementById("card").classList.add("glow");
+
+for(let i=0;i<45;i++){
+
+let heart=document.createElement("div");
+heart.innerHTML="❤️";
+heart.classList.add("heart");
+
+heart.style.left="50%";
+heart.style.top="50%";
+
+let x=(Math.random()-0.5)*700+"px";
+let y=(Math.random()-0.5)*700+"px";
+
+heart.style.setProperty('--x',x);
+heart.style.setProperty('--y',y);
+
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),1000);
+}
+
+document.getElementById("message").innerHTML =
+"<b>Now that was a kiss to remember… ❤️</b>";
+}
+
+</script>
+
+</body>
+</html>
